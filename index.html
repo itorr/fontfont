@@ -6,11 +6,14 @@
 <meta name="viewport" content="width=device-width,user-scalable=0">
 <div class="app" :data-runing="runing">
     <header>
-        <h1>字符字生成器</h1>
+        <h1>
+            <span class="logo">字符字</span><span>生成器</span>
+        </h1>
+        <p>字符生成字符字工具，你搁着搁着呢？</p>
     </header>
     <div class="config-fonts-box">
         <a @click="fontName = 'Zpix'" :data-checked="fontName === 'Zpix'" style="border-right:0;">11px</a>
-        <a @click="fontName = 'Guanzhi8px'" :data-checked="fontName === 'Guanzhi8px'" style="margin-right:10px;">7px</a>
+        <a @click="fontName = 'Guanzhi8px'" :data-checked="fontName === 'Guanzhi8px'" style="border-left:0;margin-right:10px;">7px</a>
 
         <a class="radio" @click="xpix = xpix === 1 ? 2 : 1" :data-checked="xpix === 2">二倍宽</a>
         <!-- 
@@ -29,7 +32,10 @@
          -->
     </div>
     <div class="input-box">
-        <textarea v-model="text" placeholder="键入文字、生成字符字"></textarea>
+        <textarea v-model="text" placeholder="神奇
+海螺 「字符字生成器」
+
+键入文字、生成字符字|"></textarea>
         <div>{{ text+'\n' }}</div>
     </div>
     <div class="ctrl-box">
@@ -46,13 +52,14 @@
         </span>
     </div>
     <div class="output-box">
-        <pre v-html="output" :data-zoom="zoom"></pre>
+        <pre v-html="output" :data-zoom="zoom" :data-xpix="xpix"></pre>
     </div>
     <blockquote>
         <p>
             <del>MacOS 下可选 8px，Windows Chrome 由于最小文字尺寸限制无法使用小于 12px 的文字</del><br>
             已经支持了！
         </p>
+        <p>微博中使用建议字符字小于 35 列</p>
     </blockquote>
     <footer>
         <div class="copyright">

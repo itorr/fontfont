@@ -36,7 +36,7 @@ let textDefault = `神奇
 
 『吹响吧!
  上低音号』
- 
+
 卜卜口
 =@#$%^&*()
 ABCxyz
@@ -51,7 +51,7 @@ const data = {
 	output:'',
 	isMac,
 	xpix:1,
-	zoom: document.body.offsetWidth < 1200 ? 0.5 : 1
+	zoom: document.body.offsetWidth < 1000 ? 0.5 : 1
 };
 
 
@@ -60,6 +60,7 @@ const app = new Vue({
 	data,
 	methods: {
 		generate(){
+			this.runing = true;
 			clearTimeout(generate.T);
 			generate.T = setTimeout(_ => {
 				const text = this.text.trim() || textDefault;
@@ -70,7 +71,8 @@ const app = new Vue({
 
 				loadFont(fontName,font=>{
 					// console.log(/loaded/,font,font.fontFace.loaded)
-					this.output = text.split(/\n/g).map(text=>generate({text,fontName,xpix})).join('');
+					this.output = text.split(/\n/g).map(text=>generate({text,fontName,xpix})).join('').replace(/^<br>/,'');
+					this.runing = false;
 				});
 			},300);
 		},

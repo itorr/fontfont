@@ -74,7 +74,7 @@ const generate = ({text,fontName,xpix = 1})=>{
 
 	let _width = Math.ceil(getTextWidth(text)/2)*2;
 
-	if(!_width) return new Array(fontSize/2 *xpix).fill('<br>').join('');
+	if(!_width) return new Array(Math.floor(fontSize/2/1.4)).fill('<br>').join('');
 
 	let _height = fontHeight;
 
@@ -135,6 +135,6 @@ const generate = ({text,fontName,xpix = 1})=>{
 		if( pixelNum % (_width/2 * xpix) === (_width/2 * xpix) - 1) rs.push('<br>');
 	}
 
-	return rs.join('');
+	return rs.join('').replace(/　+?<br>/g,'<br>')//.replace(/^<br>/,'')
 	
 };
