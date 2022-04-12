@@ -5,83 +5,87 @@
  */
 
 
+var shiftCharCode = Δ => c => String.fromCharCode(c.charCodeAt(0) + Δ);
+var toFullWidth = str => str.replace(/[!-~]/g, shiftCharCode(0xFEE0));
+var toHalfWidth = str => str.replace(/[！-～]/g, shiftCharCode(-0xFEE0));
 
 
 
 
-// const canvas = document.createElement('canvas');
-const canvas = document.querySelector('canvas');
-const ctx = canvas.getContext('2d');
 const outputEl = document.querySelector('.output-box');
 const inputEl = document.querySelector('textarea');
 
-const myFont = new FontFace('ZpixReviewLocal', 'url(./zpix.woff2)')
-myFont.load().then(font => {
-	document.fonts.add(font)
-}).then(_ => {
-	// text = text.split('').join(String.fromCharCode(8202));
 
-	canvas.style.letterSpacing = '-1px';
-	ctx.fillStyle = '#000';
-	ctx.font = '12px/14px ZpixReviewLocal,sans-serif';
-	ctx.textAlign = 'left';
-	ctx.direction = 'ltr,start';
-	ctx.textBaseline = 'top';
+const text = `神奇★海螺
+「字符字」
+〔生成器〕
+★★★★★
+一二三四五
+上山打老虎
 
-	const getTextWidth = text=>{
-		return ctx.measureText(text).width;
-	}
-	const generate = text=>{
+『吹响吧!
+ 上低音号』
+卜卜口=@#$%^&*()
 
-		const _width = getTextWidth(text);
-		const _height = 14;
-	
-		ctx.clearRect( 0, 0, _width, _height );
-		ctx.fillText(text, 0, 0);
-	
-		const pixel = ctx.getImageData(0,0,_width,_height);
-	
-		const pixelData = pixel.data;
-		window.pixelData = pixelData;
-	
-		const max = _width * _height;
-	
-		const fonts = [];
-		
-		for(let pixelNum = 0; pixelNum < max; pixelNum++){
-			const i = pixelNum * 4;
-	
-			const a = pixelData[i+3];
-			// console.log(a);
-			const font = text[Math.floor(( pixelNum % _width ) / _width * text.length)];
-			const spaceWidth = getTextWidth(font);
-			console.log();
-			const isMono = 12 === spaceWidth;
-			if(!isMono){
-				console.log(/这不是一个等宽字符/,spaceWidth);
-			}
-			fonts.push(a<128?'　':font);
-			if( pixelNum % _width === _width - 1) fonts.push('<br>');
+lab.magiconch.com/
+Fontfont`;
+
+
+
+const isMac = /Macintosh/.test(navigator.userAgent);
+
+const data = {
+	text,
+	runing:false,
+	fontName: fonts[0].name,
+	output:'',
+	isMac,
+	zoom: document.body.offsetWidth < 1200 ? 0.5 : 1
+};
+
+
+const app = new Vue({
+	el: '.app',
+	data,
+	methods: {
+		generate(){
+			clearTimeout(generate.T);
+			generate.T = setTimeout(_ => {
+				const text = this.text.trim();
+				if(!text) return outputEl.innerHTML = '';
+
+				const fontName = app.fontName;
+
+				loadFont(fontName,font=>{
+					// console.log(/loaded/,font,font.fontFace.loaded)
+					this.output = text.split(/\n/g).map(text=>generate(text,fontName)).join('');
+				});
+			},300);
+		},
+		copy(text){
+			let inputEl= document.createElement('input');
+			inputEl.value = text;
+			document.body.appendChild(inputEl);
+			inputEl.select();
+			document.execCommand('Copy'); 
+			inputEl.remove()
+		},
+		copyOutput(){
+			this.copy(this.output.replace(/<br>/g,'\n'))
 		}
-	
-		outputEl.innerHTML = fonts.join('');
-	}
-	inputEl.oninput = _=>{
-		const text = inputEl.value;
-		generate(text);
+	},
+	watch: {
+		fontName(){
+			this.generate();
+		},
+		text(){
+			this.generate();
+		}
 	}
 });
 
 
-
-
-
-
-
-
-
-
-
+app.generate();
 
 
 

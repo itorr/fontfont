@@ -8,24 +8,39 @@
     <header>
         <h1>字符字生成器</h1>
     </header>
+    <div class="config-fonts-box" v-if="isMac">
+        <label>
+            <input type="radio" v-model="fontName" value="Zpix">
+            12px
+        </label>
+        <label>
+            <input type="radio" v-model="fontName" value="Guanzhi8px">
+            8px
+        </label>
+    </div>
     <div class="input-box">
-        <textarea></textarea>
+        <textarea v-model="text"></textarea>
+        <div>{{ text+'\n' }}</div>
     </div>
-
-    <canvas width="800" height="20"></canvas>
+    <div class="ctrl-box">
+        <button @click="copyOutput()">复制字符字</button>
+        <span style="display: inline-block;margin:0 10px;">
+            <label>
+                <input type="radio" v-model="zoom" :value="0.5">
+                0.5
+            </label>
+            <label>
+                <input type="radio" v-model="zoom" :value="1">
+                1.0
+            </label>
+        </span>
+    </div>
     <div class="output-box">
+        <pre v-html="output" :data-zoom="zoom"></pre>
     </div>
-
     <blockquote>
-        <h2>「字符字生成器」生成字符字工具</h2>
-        <p>&nbsp;</p>
-        <p>水印用户名可自定义</p>
+        <p>MacOS 下可选 8px，Windows Chrome 由于最小文字尺寸限制无法使用小于 12px 的文字</p>
     </blockquote>
-    <div class="post-box">
-        <p>图片<b>不会上传到服务器</b>，请安心利用~</p>
-        <p>无法正常选择图片请尝试使用自带浏览器！</p>
-        <p>年份不够用的情况可以页面内拖拽输出图像再次包浆</p>
-    </div>
     <footer>
         <div class="copyright">
             <br>
@@ -40,44 +55,12 @@
             <a href="https://lab.magiconch.com/">神奇海螺实验室</a>
             <hr>
             打赏：<a href="https://lab.magiconch.com/nbnhhsh/sponsor.png" target="_blank">二维码</a>
+            <hr>
+            利用：<a href="https://github.com/SolidZORO/zpix-pixel-font" target="_blank">最像素 Zpix</a>、观致 8px
         </div>
     </footer>
 
-    <div class="tip-box">
-        <h3>相关项目</h3>
-        <ul>
-            <li>
-                <h4>「 蒸 気 機 」虚拟信号蒸汽波风格化影像后期工具</h4>
-                <a href="https://lab.magiconch.com/vaporwave/?from=patina" target="_blank">lab.magiconch.com/vaporwave</a>
-            </li>
-        </ul>
-    </div>
-    <div class="tip-box">
-        <h3>利用</h3>
-        <ul>
-            <li>
-                <h4>最像素 Zpix - 一个支持中日英文的像素字体</h4>
-                <a href="https://github.com/SolidZORO/zpix-pixel-font" target="_blank">github.com/SolidZORO/zpix-pixel-font</a>
-            </li>
-        </ul>
-    </div>
-    <div class="tip-box">
-        <h3>参考</h3>
-        <ul>
-            <li>
-                <h4>梗图生成器 - 所见即所得的梗图生成器、支持电子包浆等功能</h4>
-                <a href="http://x.magiconch.com/" target="_blank">x.magiconch.com</a>
-            </li>
-            <li>
-                <h4>JPEGreen Simulator</h4>
-                <a href="https://m13253.github.io/JPEGreen/" target="_blank">m13253.github.io/JPEGreen</a>
-            </li>
-            <li>
-                <h4>Use libjpeg-turbo for YUV->RGB conversion in jpeg encoder</h4>
-                <a href="https://github.com/google/skia/commit/c7d01d3e1d3621907c27b283fb7f8b6e177c629d" target="_blank">github.com/google/skia/commit/c7d01d3e1d3621907c27b283fb7f8b6e177c629d</a>
-            </li>
-        </ul>
-    </div>
 </div>
-
+<script src="vue.2.6.11.min.js"></script>
+<script src="fontfont.js"></script>
 <script src="document.js"></script>
