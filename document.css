@@ -48,7 +48,7 @@ a{
 canvas{
 	image-rendering: pixelated;
 	position: absolute;
-	width:1px;
+	/* width:1px; */
 	-webkit-text-size-adjust:none;
 }
 
@@ -300,6 +300,21 @@ label input[type="radio"]:checked:after{
 label input[type="radio"]:checked:after{
 	border-radius: 1px;
 }
+label input[type="checkbox"]:disabled,
+label input[type="radio"]:disabled{
+	cursor: not-allowed;
+}
+label input[type="checkbox"]:disabled + span,
+label input[type="radio"]:disabled + span{
+
+}
+
+label[data-disabled]{
+	opacity: 0.5;
+	cursor: not-allowed;
+}
+
+
 .config-fonts-box{
 	padding:10px 20px;
 }

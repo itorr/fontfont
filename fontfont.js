@@ -14,7 +14,7 @@ var toHalfWidth = str => str.replace(/[！-～]/g, shiftCharCode(-0xFEE0));
 const canvas = document.createElement('canvas');
 
 canvas.width = 600;
-canvas.height = 20;
+canvas.height = 50;
 document.body.appendChild(canvas);
 // const canvas = document.querySelector('canvas');
 const ctx = canvas.getContext('2d');
@@ -22,7 +22,7 @@ const ctx = canvas.getContext('2d');
 const fonts = [
 	{
 		size: 12,
-		height: 13,
+		height: 12,
 		name: 'Zpix',
 		url: 'zpix.woff2'
 	},
@@ -56,8 +56,10 @@ const generate = (text,fontName)=>{
 
 	const font = Fonts[fontName];
 	// console.log(font)
-	const fontSize = font.size;
-	const fontStyle = `${fontSize}px/${font.height}px ${font.name},sans-serif`;
+	const fontSize = font.size * 2;
+	const fontHeight = font.height * 2;
+
+	const fontStyle = `${fontSize}px/${fontHeight}px ${fontName},sans-serif`;
 
 	// console.log(/fontStyle/,fontStyle);
 
@@ -70,29 +72,33 @@ const generate = (text,fontName)=>{
 	
 	text = text.replace(' ','　');
 
-	const _width = Math.ceil(getTextWidth(text));
-	if(!_width) return new Array(fontSize).fill('<br>').join('');
-	// console.log(_width)
+	let _width = Math.ceil(getTextWidth(text));
 
-	const _height = font.height;
+	if(!_width) return new Array(fontSize).fill('<br>').join('');
+
+	let _height = fontHeight;
 
 	ctx.clearRect( 0, 0, _width, _height );
 	ctx.fillText(text, 0, 0);
 
-	const pixel = ctx.getImageData(0,0,_width,_height);
+	ctx.clearRect(0 , 30 ,_width / 2 , _height / 2);
+	ctx.drawImage(canvas, 0, 0, _width, _height , 0 , 30 ,_width / 2 , _height / 2 );
+
+	console.log(0,30, _width / 2, _height / 2)
+	const pixel = ctx.getImageData(0,30, _width / 2, _height / 2);
 
 	const pixelData = pixel.data;
 
-	const max = _width * _height;
+	const max = _width * _height /2 /2;
 
 
 	let texti = 1;
 	const textl = text.length;
 	const textWidths = [];
 	for(;texti<textl;texti++){
-		textWidths.push(Math.floor(getTextWidth(text.slice(0,texti))));
+		textWidths.push(Math.floor(getTextWidth(text.slice(0,texti)) / 2));
 	}
-	textWidths.push(_width);
+	textWidths.push(_width / 2);
 
 	const monoText = toFullWidth(text)
 
@@ -111,11 +117,11 @@ const generate = (text,fontName)=>{
 		const a = pixelData[i+3];
 		// console.log(a);
 
-		const _font = getFont(pixelNum % _width);
+		const _font = getFont(pixelNum % (_width/2) );
 
-		const spaceWidth = Math.floor(getTextWidth(_font));
+		const spaceWidth = Math.floor(getTextWidth(_font)/2);
 
-		const isMono = font.height === spaceWidth;
+		const isMono = (fontHeight/2) === spaceWidth;
 		let t = _font;
 
 		// if(!isMono){
@@ -125,7 +131,8 @@ const generate = (text,fontName)=>{
 		// }
 
 		rs.push(a<128?'　':t);
-		if( pixelNum % _width === _width - 1) rs.push('<br>');
+
+		if( pixelNum % (_width/2) === (_width/2) - 1) rs.push('<br>');
 	}
 
 	return rs.join('');

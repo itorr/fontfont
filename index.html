@@ -8,14 +8,18 @@
     <header>
         <h1>字符字生成器</h1>
     </header>
-    <div class="config-fonts-box" v-if="isMac">
+    <div class="config-fonts-box">
         <label>
             <input type="radio" v-model="fontName" value="Zpix">
             12px
         </label>
+        <!-- <label :data-disabled="!isMac" title="由于 Windows Chrome 最小文字尺寸限制，无法使用 8px 像素文字">
+            <input type="radio" v-model="fontName" value="Guanzhi8px" :disabled="!isMac">
+            <span>8px</span>
+        </label> -->
         <label>
             <input type="radio" v-model="fontName" value="Guanzhi8px">
-            8px
+            <span>8px</span>
         </label>
     </div>
     <div class="input-box">
