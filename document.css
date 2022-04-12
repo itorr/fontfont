@@ -48,12 +48,16 @@ a{
 canvas{
 	image-rendering: pixelated;
 	position: absolute;
-	/* width:1px; */
+	width:1px;
 	-webkit-text-size-adjust:none;
 }
 
 .output-box{
 	padding: 0;
+
+	overflow: auto;
+	width:100%;
+	box-sizing: border-box;
 }
 .output-box pre{
 	line-height: 1;
@@ -63,7 +67,9 @@ canvas{
 }
 .output-box pre[data-zoom="0.5"]{
 	padding: 40px;
-	zoom:.5;
+	/* zoom:.5; */
+	transform: scale(.5);
+	transform-origin: 0 0;
 }
 header{
 	padding:20px;
@@ -128,9 +134,6 @@ pre{
 	color: var(--font-color);
 	padding:6px;
 	margin:0;
-	overflow: auto;
-	width:100%;
-	box-sizing: border-box;
 }
 .app[data-runing="true"]{
 	cursor: wait;

@@ -72,9 +72,9 @@ const generate = (text,fontName)=>{
 	
 	text = text.replace(' ','　');
 
-	let _width = Math.ceil(getTextWidth(text));
+	let _width = Math.ceil(getTextWidth(text)/2)*2;
 
-	if(!_width) return new Array(fontSize).fill('<br>').join('');
+	if(!_width) return new Array(fontSize/2).fill('<br>').join('');
 
 	let _height = fontHeight;
 
@@ -84,7 +84,7 @@ const generate = (text,fontName)=>{
 	ctx.clearRect(0 , 30 ,_width / 2 , _height / 2);
 	ctx.drawImage(canvas, 0, 0, _width, _height , 0 , 30 ,_width / 2 , _height / 2 );
 
-	console.log(0,30, _width / 2, _height / 2)
+	// console.log(0,30, _width / 2, _height / 2)
 	const pixel = ctx.getImageData(0,30, _width / 2, _height / 2);
 
 	const pixelData = pixel.data;
@@ -117,7 +117,7 @@ const generate = (text,fontName)=>{
 		const a = pixelData[i+3];
 		// console.log(a);
 
-		const _font = getFont(pixelNum % (_width/2) );
+		const _font = getFont(pixelNum % Math.floor(_width/2) );
 
 		const spaceWidth = Math.floor(getTextWidth(_font)/2);
 

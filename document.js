@@ -16,10 +16,10 @@ const outputEl = document.querySelector('.output-box');
 const inputEl = document.querySelector('textarea');
 
 
-const text = `神奇★海螺
+let text = `神奇海螺实验室
 「字符字」
 〔生成器〕
-★★★★★
+
 一二三四五
 上山打老虎
 
@@ -30,6 +30,7 @@ const text = `神奇★海螺
 lab.magiconch.com/
 Fontfont`;
 
+// text = '『吹响吧!\n 上低音号』';
 
 
 const isMac = /Macintosh/.test(navigator.userAgent);
@@ -63,7 +64,7 @@ const app = new Vue({
 			},300);
 		},
 		copy(text){
-			let inputEl= document.createElement('input');
+			let inputEl= document.createElement('textarea');
 			inputEl.value = text;
 			document.body.appendChild(inputEl);
 			inputEl.select();
