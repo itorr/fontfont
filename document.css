@@ -108,7 +108,7 @@ h1 span{
 	white-space: nowrap;
 }
 h1 span.logo{
-	background:rgba(0,0,0,.2);
+	
 }
 @media (max-width:420px) {
 	h1 span{
