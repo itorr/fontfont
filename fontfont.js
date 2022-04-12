@@ -52,7 +52,7 @@ const loadFont = async (fontName,callback) => {
 const getTextWidth = text=>{
 	return ctx.measureText(text).width;
 }
-const generate = (text,fontName)=>{
+const generate = ({text,fontName,xpix = 1})=>{
 
 	const font = Fonts[fontName];
 	// console.log(font)
@@ -74,31 +74,31 @@ const generate = (text,fontName)=>{
 
 	let _width = Math.ceil(getTextWidth(text)/2)*2;
 
-	if(!_width) return new Array(fontSize/2).fill('<br>').join('');
+	if(!_width) return new Array(fontSize/2 *xpix).fill('<br>').join('');
 
 	let _height = fontHeight;
 
 	ctx.clearRect( 0, 0, _width, _height );
 	ctx.fillText(text, 0, 0);
 
-	ctx.clearRect(0 , 30 ,_width / 2 , _height / 2);
-	ctx.drawImage(canvas, 0, 0, _width, _height , 0 , 30 ,_width / 2 , _height / 2 );
+	ctx.clearRect(0 , 30 ,_width / 2 * xpix , _height / 2);
+	ctx.drawImage(canvas, 0, 0, _width, _height , 0 , 30 ,_width / 2 * xpix , _height / 2 );
 
 	// console.log(0,30, _width / 2, _height / 2)
-	const pixel = ctx.getImageData(0,30, _width / 2, _height / 2);
+	const pixel = ctx.getImageData(0,30, _width / 2 * xpix, _height / 2);
 
 	const pixelData = pixel.data;
 
-	const max = _width * _height /2 /2;
+	const max = _width * _height /2 /2 * xpix;
 
 
 	let texti = 1;
 	const textl = text.length;
 	const textWidths = [];
 	for(;texti<textl;texti++){
-		textWidths.push(Math.floor(getTextWidth(text.slice(0,texti)) / 2));
+		textWidths.push(Math.floor(getTextWidth(text.slice(0,texti)) / 2 * xpix));
 	}
-	textWidths.push(_width / 2);
+	textWidths.push(_width / 2 * xpix);
 
 	const monoText = toFullWidth(text)
 
@@ -117,9 +117,9 @@ const generate = (text,fontName)=>{
 		const a = pixelData[i+3];
 		// console.log(a);
 
-		const _font = getFont(pixelNum % Math.floor(_width/2) );
+		const _font = getFont(pixelNum % Math.floor(_width/2 * xpix) );
 
-		const spaceWidth = Math.floor(getTextWidth(_font)/2);
+		const spaceWidth = Math.floor(getTextWidth(_font)/2 * xpix);
 
 		const isMono = (fontHeight/2) === spaceWidth;
 		let t = _font;
@@ -132,7 +132,7 @@ const generate = (text,fontName)=>{
 
 		rs.push(a<128?'　':t);
 
-		if( pixelNum % (_width/2) === (_width/2) - 1) rs.push('<br>');
+		if( pixelNum % (_width/2 * xpix) === (_width/2 * xpix) - 1) rs.push('<br>');
 	}
 
 	return rs.join('');

@@ -9,33 +9,39 @@
         <h1>字符字生成器</h1>
     </header>
     <div class="config-fonts-box">
+        <a @click="fontName = 'Zpix'" :data-checked="fontName === 'Zpix'" style="border-right:0;">11px</a>
+        <a @click="fontName = 'Guanzhi8px'" :data-checked="fontName === 'Guanzhi8px'" style="margin-right:10px;">7px</a>
+
+        <a class="radio" @click="xpix = xpix === 1 ? 2 : 1" :data-checked="xpix === 2">二倍宽</a>
+        <!-- 
         <label>
             <input type="radio" v-model="fontName" value="Zpix">
             12px
         </label>
-        <!-- <label :data-disabled="!isMac" title="由于 Windows Chrome 最小文字尺寸限制，无法使用 8px 像素文字">
+        <label :data-disabled="!isMac" title="由于 Windows Chrome 最小文字尺寸限制，无法使用 8px 像素文字">
             <input type="radio" v-model="fontName" value="Guanzhi8px" :disabled="!isMac">
             <span>8px</span>
-        </label> -->
+        </label>
         <label>
             <input type="radio" v-model="fontName" value="Guanzhi8px">
             <span>8px</span>
         </label>
+         -->
     </div>
     <div class="input-box">
-        <textarea v-model="text"></textarea>
+        <textarea v-model="text" placeholder="键入文字、生成字符字"></textarea>
         <div>{{ text+'\n' }}</div>
     </div>
     <div class="ctrl-box">
-        <button @click="copyOutput()">复制字符字</button>
+        <button @click="copyOutput()">复制 字符字 到剪贴板</button>
         <span style="display: inline-block;margin:0 10px;">
             <label>
                 <input type="radio" v-model="zoom" :value="0.5">
-                0.5
+                x0.5
             </label>
             <label>
                 <input type="radio" v-model="zoom" :value="1">
-                1.0
+                x1.0
             </label>
         </span>
     </div>
@@ -43,7 +49,10 @@
         <pre v-html="output" :data-zoom="zoom"></pre>
     </div>
     <blockquote>
-        <p><del>MacOS 下可选 8px，Windows Chrome 由于最小文字尺寸限制无法使用小于 12px 的文字</del> 已经支持了！</p>
+        <p>
+            <del>MacOS 下可选 8px，Windows Chrome 由于最小文字尺寸限制无法使用小于 12px 的文字</del><br>
+            已经支持了！
+        </p>
     </blockquote>
     <footer>
         <div class="copyright">
@@ -59,11 +68,10 @@
             <a href="https://lab.magiconch.com/">神奇海螺实验室</a>
             <hr>
             打赏：<a href="https://lab.magiconch.com/nbnhhsh/sponsor.png" target="_blank">二维码</a>
-            <hr>
+            <br>
             利用：<a href="https://github.com/SolidZORO/zpix-pixel-font" target="_blank">最像素 Zpix</a>、观致 8px
         </div>
     </footer>
-
 </div>
 <script src="vue.2.6.11.min.js"></script>
 <script src="fontfont.js"></script>

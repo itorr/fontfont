@@ -62,17 +62,17 @@ canvas{
 .output-box pre{
 	line-height: 1;
 	font-family: inherit;
-	padding: 20px;
+	padding: 2em;
+	transition: transform .3s ease;
+	transform-origin: 0 0;
 	
 }
 .output-box pre[data-zoom="0.5"]{
-	padding: 40px;
 	/* zoom:.5; */
 	transform: scale(.5);
-	transform-origin: 0 0;
 }
 header{
-	padding:20px;
+	padding:80px 20px 20px;
 	line-height: 1.5;
 }
 h1{
@@ -172,7 +172,7 @@ code{
 blockquote{
 	display: inline-block;
 	background:rgba(0,0,0,.1);
-	margin:0;
+	margin:40px 0 0;
 	padding:20px;
 }
 blockquote p{
@@ -194,7 +194,7 @@ blockquote p{
 }
 
 footer{
-	padding:15px 15px 60px;
+	padding:40px 20px 100px;
 	line-height: 2;
 }
 footer hr{
@@ -320,7 +320,33 @@ label[data-disabled]{
 
 .config-fonts-box{
 	padding:10px 20px;
+	overflow: hidden;
 }
+.config-fonts-box a{
+	float: left;
+	width:60px;
+	height:60px;
+	line-height:60px;
+	text-align: center;
+	color:currentColor;
+	border:2px solid var(--font-color);
+	cursor: pointer;
+	box-shadow:
+		2px 2px 0 #666 inset,
+		-2px -2px 0 #333 inset;
+
+	/* transition: background-color .3s ease; */
+}
+.config-fonts-box a[data-checked="true"]{
+	color:var(--background-color);
+	background:var(--font-color);
+	box-shadow:none;
+}
+.config-fonts-box a.radio{
+
+}
+
+
 .input-box{
 	position: relative;
 	margin: 0 20px;
@@ -360,4 +386,24 @@ label[data-disabled]{
 	position: absolute;
 	height:100%;
 	/* left:40px; */
+}
+
+
+.toast-box{
+	position: fixed;
+	bottom:0;
+	left:0;
+	right:0;
+	margin: 0 auto 0;
+	line-height: 1.2;
+	text-align: center;
+	padding:10px 8px 60px;
+	background:var(--font-color);
+	color:var(--background-color);
+	pointer-events: none;
+	transition: opacity .3s ease, transform .3s ease;
+}
+.toast-box.h{
+	opacity: 0;
+	transform: translateY(20px);
 }
