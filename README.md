@@ -20,4 +20,7 @@
  - 7px 使用 观致 8px 字体库
 
 ## 参考
+
 [选择（Selection）和范围（Range）](https://zh.javascript.info/selection-range)
+
+[Image-to-Braille](https://github.com/505e06b2/Image-to-Braille)

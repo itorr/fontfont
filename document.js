@@ -46,6 +46,7 @@ const data = {
 	output:'',
 	isMac,
 	xpix:1,
+	braille: true,
 	zoom: document.body.offsetWidth < 1000 ? 0.5 : 1
 };
 
@@ -63,10 +64,11 @@ const app = new Vue({
 
 				const fontName = this.fontName;
 				const xpix = this.xpix;
+				const braille = this.braille;
 
 				loadFont(fontName,font=>{
 					// console.log(/loaded/,font,font.fontFace.loaded)
-					this.output = text.split(/\n/g).map(text=>generate({text,fontName,xpix})).join('').replace(/^<br>/,'');
+					this.output = text.split(/\n/g).map(text=>generate({text,fontName,xpix,braille})).join('').replace(/^<br>/,'');
 					this.runing = false;
 				});
 			},300);
@@ -93,6 +95,9 @@ const app = new Vue({
 			this.generate();
 		},
 		xpix(){
+			this.generate();
+		},
+		braille(){
 			this.generate();
 		}
 	}

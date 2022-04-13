@@ -2,7 +2,7 @@
 <meta charset="UTF-8">
 <title>字符字生成器 - 神奇海螺实验室</title>
 <meta name="discription" content="字符字生成器 - 神奇海螺实验室">
-<link rel="stylesheet" href="document.css">
+<link rel="stylesheet" href="document.css?r=220413">
 <meta name="viewport" content="width=device-width,user-scalable=0">
 <div class="app" :data-runing="runing">
     <header>
@@ -13,9 +13,10 @@
     </header>
     <div class="config-fonts-box">
         <a @click="fontName = 'Zpix'" :data-checked="fontName === 'Zpix'" style="border-right:0;">11px</a>
-        <a @click="fontName = 'Guanzhi8px'" :data-checked="fontName === 'Guanzhi8px'" style="border-left:0;margin-right:10px;">7px</a>
+        <a @click="fontName = 'Guanzhi8px'" :data-checked="fontName === 'Guanzhi8px'" style="border-left:0;">7px</a>
 
-        <a class="radio" @click="xpix = xpix === 1 ? 2 : 1" :data-checked="xpix === 2">二倍宽</a>
+        <a class="radio" @click="xpix = xpix === 1 ? 2 : 1" :data-checked="xpix === 2" style="margin-left:10px;">二倍宽</a>
+        <a class="radio" @click="braille = !braille" :data-checked="braille" style="margin-left:10px;">盲文</a>
         <!-- 
         <label>
             <input type="radio" v-model="fontName" value="Zpix">
@@ -64,6 +65,7 @@
             已经支持了！
         </p>
         <p>微博中使用建议字符字小于 35 列</p>
+        <p>添加了盲文格式，实用性更强了</p>
     </blockquote>
     <footer>
         <div class="copyright">
@@ -81,9 +83,12 @@
             打赏：<a href="https://lab.magiconch.com/nbnhhsh/sponsor.png" target="_blank">二维码</a>
             <br>
             利用：<a href="https://github.com/SolidZORO/zpix-pixel-font" target="_blank">最像素 Zpix</a>、观致 8px
+            <br>
+            盲文部分参考了 <a href="https://github.com/505e06b2/Image-to-Braille" target="_blank">Image-to-Braille</a>
         </div>
     </footer>
 </div>
 <script src="vue.2.6.11.min.js"></script>
-<script src="fontfont.js"></script>
-<script src="document.js"></script>
+<script src="braille.js?r=220413"></script>
+<script src="fontfont.js?r=220413"></script>
+<script src="document.js?r=220413"></script>

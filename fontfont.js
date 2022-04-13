@@ -5,10 +5,9 @@
  */
 
 
-var shiftCharCode = Δ => c => String.fromCharCode(c.charCodeAt(0) + Δ);
-var toFullWidth = str => str.replace(/[!-~]/g, shiftCharCode(0xFEE0));
-var toHalfWidth = str => str.replace(/[！-～]/g, shiftCharCode(-0xFEE0));
-
+const shiftCharCode = Δ => c => String.fromCharCode(c.charCodeAt(0) + Δ);
+const toFullWidth = str => str.replace(/[!-~]/g, shiftCharCode(0xFEE0));
+const toHalfWidth = str => str.replace(/[！-～]/g, shiftCharCode(-0xFEE0));
 
 
 const canvas = document.createElement('canvas');
@@ -52,7 +51,7 @@ const loadFont = async (fontName,callback) => {
 const getTextWidth = text=>{
 	return ctx.measureText(text).width;
 }
-const generate = ({text,fontName,xpix = 1})=>{
+const generate = ({text,fontName,xpix = 1,braille = false})=>{
 
 	const font = Fonts[fontName];
 	// console.log(font)
@@ -91,6 +90,10 @@ const generate = ({text,fontName,xpix = 1})=>{
 
 	const max = _width * _height /2 /2 * xpix;
 
+
+	if(braille){
+		return imageToBraille(pixelData,_width/2,_height/2 * xpix);
+	}
 
 	let texti = 1;
 	const textl = text.length;

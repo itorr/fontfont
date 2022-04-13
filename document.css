@@ -15,7 +15,7 @@
 }
 
 html{
-	font:400 12px/1.4 Zpix,sans-serif;
+	font:400 12px/1.4 -apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,Zpix,sans-serif,"Apple Color Emoji","Segoe UI Emoji";
 	text-rendering:optimizeLegibility;
 	-webkit-font-smoothing:antialiased;
 	-moz-osx-font-smoothing:grayscale;
@@ -73,6 +73,7 @@ canvas{
 	transform-origin: 0 0;
 	
 	
+    letter-spacing: -2px;
 }
 .output-box pre[data-zoom="0.5"]{
 	/* zoom:.5; */
