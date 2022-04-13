@@ -46,7 +46,7 @@ const data = {
 	output:'',
 	isMac,
 	xpix:1,
-	braille: true,
+	braille: false,
 	zoom: document.body.offsetWidth < 1000 ? 0.5 : 1
 };
 

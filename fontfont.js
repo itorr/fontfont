@@ -68,8 +68,7 @@ const generate = ({text,fontName,xpix = 1,braille = false})=>{
 	ctx.direction = 'ltr,start';
 	ctx.textBaseline = 'top';
 
-	
-	text = text.replace(' ','　');
+	if(!braille) text = text.replace(' ','　');
 
 	let _width = Math.ceil(getTextWidth(text)/2)*2;
 

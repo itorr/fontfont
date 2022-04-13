@@ -8,9 +8,9 @@ function pixelsToCharacter(pixels_lo_hi) { //expects an array of 8 bools
 		codepoint_offset += (+pixels_lo_hi[i]) << shift_values[i];
 	}
 
-	// if(codepoint_offset === 0 ) { //pixels were all blank
-	// 	codepoint_offset = 4; //0x2800 is a blank braille char, 0x2804 is a single dot
-	// }
+	if(codepoint_offset === 0 ) { //pixels were all blank
+		codepoint_offset = 4; //0x2800 is a blank braille char, 0x2804 is a single dot
+	}
     return String.fromCharCode(0x2800 + codepoint_offset);
 }
 const imageToBraille = (pixelData,width,height) => {
