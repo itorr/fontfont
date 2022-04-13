@@ -78,6 +78,10 @@ canvas{
 	/* zoom:.5; */
 	transform: scale(.5);
 }
+.output-box pre[data-zoom="0.1"]{
+	/* zoom:.5; */
+	transform: scale(0.0833);
+}
 .output-box pre[data-xpix="2"]{
 	/* line-height: 2; */
 }

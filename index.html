@@ -42,6 +42,10 @@
         <button @click="copyOutput()">复制 字符字 到剪贴板</button>
         <span style="display: inline-block;margin:0 10px;">
             <label>
+                <input type="radio" v-model="zoom" :value="0.1">
+                %12
+            </label>
+            <label>
                 <input type="radio" v-model="zoom" :value="0.5">
                 x0.5
             </label>
