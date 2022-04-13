@@ -16,14 +16,15 @@ function pixelsToCharacter(pixels_lo_hi) { //expects an array of 8 bools
 const imageToBraille = (pixelData,width,height) => {
 	let output = '';
 	for(let imgy = 0; imgy < height; imgy += 4) {
-		for(let imgx = 0; imgx < width; imgx += 2) {
+		for(let imgx = 0; imgx < width - 1; imgx += 2) {
 			const braille_info = [0,0,0,0,0,0,0,0];
 			let dot_index = 0;
 			for(let x = 0; x < 2; x++) {
 				for(let y = 0; y < 4; y++) {
 					const index = (imgx+x + width * (imgy+y)) * 4;
 
-					const a = pixelData[index+3]; //ctx.getImageData(imgx+x,imgy+y,1,1).data
+					const a = pixelData[index+3] || 0; //ctx.getImageData(imgx+x,imgy+y,1,1).data
+					
 					if(a >= 128) { //account for alpha
 						braille_info[dot_index] = 1;
 					}

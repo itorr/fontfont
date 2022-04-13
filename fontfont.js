@@ -73,7 +73,7 @@ const generate = ({text,fontName,xpix = 1,braille = false})=>{
 
 	let _width = Math.ceil(getTextWidth(text)/2)*2;
 
-	if(!_width) return new Array(Math.floor(fontSize/2/1.4)).fill('<br>').join('');
+	if(!_width) return new Array(Math.floor(fontSize/2/1.4/braille?3:1)).fill('<br>').join('');
 
 	let _height = fontHeight;
 
@@ -92,7 +92,7 @@ const generate = ({text,fontName,xpix = 1,braille = false})=>{
 
 
 	if(braille){
-		return imageToBraille(pixelData,_width/2,_height/2 * xpix);
+		return imageToBraille(pixelData,_width/2 * xpix,_height/2);
 	}
 
 	let texti = 1;
@@ -138,6 +138,6 @@ const generate = ({text,fontName,xpix = 1,braille = false})=>{
 		if( pixelNum % (_width/2 * xpix) === (_width/2 * xpix) - 1) rs.push('<br>');
 	}
 
-	return rs.join('').replace(/　+?<br>/g,'<br>')//.replace(/^<br>/,'')
+	return rs.join('').replace(/　+?<br>/g,'\n')//.replace(/^<br>/,'')
 	
 };
