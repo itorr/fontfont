@@ -1,13 +1,8 @@
 /*!
- * Fontfont.js 
- * @itorr <https://lab.magiconch.com/>
+ * document.js 
+ * @itorr <https://lab.magiconch.com/fontfont>
  * 2022-04-12
  */
-
-
-var shiftCharCode = Δ => c => String.fromCharCode(c.charCodeAt(0) + Δ);
-var toFullWidth = str => str.replace(/[!-~]/g, shiftCharCode(0xFEE0));
-var toHalfWidth = str => str.replace(/[！-～]/g, shiftCharCode(-0xFEE0));
 
 
 
