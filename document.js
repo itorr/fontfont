@@ -68,7 +68,7 @@ const app = new Vue({
 
 				loadFont(fontName,font=>{
 					// console.log(/loaded/,font,font.fontFace.loaded)
-					this.output = text.split(/\n/g).map(text=>generate({text,fontName,xpix,braille})).join('').replace(/^<br>/,'');
+					this.output = text.split(/\n/g).map(text=>generate({text,fontName,xpix,braille})).join('').replace(/^(<br>|\n)+/,'').replace(/^　/,'｀');
 					this.runing = false;
 				});
 			},300);
