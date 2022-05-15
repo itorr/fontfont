@@ -58,9 +58,9 @@ const generate = ({text,fontName,xpix = 1,braille = false})=>{
 	const fontSize = font.size * 2;
 	const fontHeight = font.height * 2;
 
-	const fontStyle = `${fontSize}px/${fontHeight}px ${fontName},sans-serif`;
+	const fontStyle = `${fontSize}px ${fontName},sans-serif`; ///${fontHeight}px
 
-	// console.log(/fontStyle/,fontStyle);
+	console.log(/fontStyle/,fontStyle);
 
 	ctx.fillStyle = '#000';
 	ctx.font = fontStyle;
